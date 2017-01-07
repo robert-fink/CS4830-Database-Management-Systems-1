@@ -1,0 +1,188 @@
+-- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: project2
+-- ------------------------------------------------------
+-- Server version	5.5.47-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course` (
+  `did` int(11) NOT NULL DEFAULT '0',
+  `num` int(11) NOT NULL DEFAULT '0',
+  `instructor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`did`,`num`),
+  KEY `instructor` (`instructor`),
+  CONSTRAINT `course_ibfk_1` FOREIGN KEY (`instructor`) REFERENCES `instructor` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `course_ibfk_2` FOREIGN KEY (`did`) REFERENCES `department` (`did`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course`
+--
+
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES (200398,1000,10033),(200441,1400,10046),(200847,1500,10057),(200542,1700,10088),(200847,4380,10088),(200398,7510,10107),(200637,4380,10107),(200637,7510,10107),(200441,1700,10235),(200637,1500,10235),(200637,1400,10371),(200847,3380,10371),(200398,4380,10538),(200441,1000,10538),(200542,1400,10538),(200441,4380,10662),(200637,1000,10662);
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `department`
+--
+
+DROP TABLE IF EXISTS `department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `department` (
+  `did` int(11) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`did`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `department`
+--
+
+LOCK TABLES `department` WRITE;
+/*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (200398,'Informatics Institute'),(200441,'Information Technology'),(200542,'Electrical and Computer Engineering'),(200637,'Chemical Engineering'),(200744,'Business Administration'),(200847,'Computer Science');
+/*!40000 ALTER TABLE `department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enroll`
+--
+
+DROP TABLE IF EXISTS `enroll`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enroll` (
+  `did` int(11) NOT NULL DEFAULT '0',
+  `num` int(11) NOT NULL DEFAULT '0',
+  `sid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`did`,`num`,`sid`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `enroll_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student` (`sid`) ON DELETE CASCADE,
+  CONSTRAINT `enroll_ibfk_2` FOREIGN KEY (`did`, `num`) REFERENCES `course` (`did`, `num`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enroll`
+--
+
+LOCK TABLES `enroll` WRITE;
+/*!40000 ALTER TABLE `enroll` DISABLE KEYS */;
+INSERT INTO `enroll` VALUES (200398,1000,5000021),(200398,4380,5000021),(200542,1400,5000021),(200637,1400,5000021),(200637,4380,5000021),(200847,1500,5000021),(200847,4380,5000021),(200398,1000,5000022),(200398,7510,5000022),(200441,4380,5000022),(200637,1500,5000022),(200637,4380,5000022),(200637,7510,5000022),(200847,3380,5000022),(200847,4380,5000022),(200398,1000,5000023),(200398,4380,5000023),(200637,1400,5000023),(200637,4380,5000023),(200847,1500,5000023),(200847,4380,5000023),(200398,7510,5000024),(200441,1700,5000024),(200441,4380,5000024),(200542,1700,5000024),(200637,1000,5000024),(200847,1500,5000024),(200847,3380,5000024),(200847,4380,5000024),(200441,4380,5000025),(200637,7510,5000025),(200398,4380,5000026),(200441,1400,5000026),(200441,1700,5000026),(200637,1400,5000026),(200637,7510,5000026),(200847,3380,5000026),(200398,7510,5000027),(200637,4380,5000027),(200398,4380,5000028),(200398,7510,5000028),(200637,1000,5000028),(200637,1400,5000028),(200637,4380,5000028),(200847,4380,5000028),(200398,7510,5000029),(200441,1400,5000029),(200847,4380,5000029),(200398,1000,5000030),(200398,4380,5000030),(200398,7510,5000030),(200441,1400,5000030),(200542,1700,5000030),(200637,1000,5000030),(200637,4380,5000030),(200637,7510,5000030),(200847,4380,5000030),(200441,1700,5000031),(200847,1500,5000031),(200398,4380,5000032),(200398,7510,5000032),(200441,1400,5000032),(200441,1700,5000032),(200542,1400,5000032),(200542,1700,5000032),(200398,1000,5000033),(200441,1400,5000033),(200441,1700,5000033),(200441,4380,5000033),(200637,1500,5000033),(200847,1500,5000033),(200398,7510,5000034),(200441,4380,5000034),(200637,1000,5000034),(200637,1400,5000034),(200637,1500,5000034),(200847,4380,5000034),(200398,1000,5000035),(200441,1400,5000035),(200542,1400,5000035),(200637,1500,5000035),(200637,7510,5000035),(200847,1500,5000035),(200398,1000,5000036),(200441,1000,5000036),(200542,1700,5000036),(200637,7510,5000036),(200847,1500,5000036),(200398,7510,5000037),(200441,1000,5000037),(200441,4380,5000037),(200542,1400,5000037),(200637,1400,5000037),(200847,3380,5000037),(200847,4380,5000037),(200398,1000,5000038),(200847,1500,5000038),(200847,3380,5000038),(200847,4380,5000038),(200398,4380,5000039),(200441,1000,5000039),(200637,7510,5000039),(200847,3380,5000039),(200398,7510,5000040),(200441,1400,5000040),(200441,1700,5000040),(200542,1400,5000040),(200637,1500,5000040),(200637,4380,5000040),(200637,7510,5000040),(200847,1500,5000040),(200847,4380,5000040);
+/*!40000 ALTER TABLE `enroll` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `instructor`
+--
+
+DROP TABLE IF EXISTS `instructor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `instructor` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(20) DEFAULT NULL,
+  `lname` varchar(20) DEFAULT NULL,
+  `home_did` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `home_did` (`home_did`),
+  CONSTRAINT `instructor_ibfk_1` FOREIGN KEY (`home_did`) REFERENCES `department` (`did`) ON DELETE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `instructor`
+--
+
+LOCK TABLES `instructor` WRITE;
+/*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
+INSERT INTO `instructor` VALUES (10011,'Aron','Brown',200847),(10025,'Adam','Baker',200542),(10033,'Howard','Adams',200847),(10046,'Radburn','Moore',200441),(10057,'Leo','Jackson',200542),(10088,'Kevin','Walker',200542),(10091,'George','White',200441),(10107,'Justin','Hill',200637),(10222,'Timothy','King',200847),(10235,'Peter','Nelson',200542),(10371,'Philip','Green',200398),(10538,'Wilson','Clark',200847),(10662,'William','Brown',200441);
+/*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `major`
+--
+
+DROP TABLE IF EXISTS `major`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `major` (
+  `sid` int(11) NOT NULL DEFAULT '0',
+  `did` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sid`,`did`),
+  KEY `did` (`did`),
+  CONSTRAINT `major_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student` (`sid`) ON DELETE CASCADE,
+  CONSTRAINT `major_ibfk_2` FOREIGN KEY (`did`) REFERENCES `department` (`did`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `major`
+--
+
+LOCK TABLES `major` WRITE;
+/*!40000 ALTER TABLE `major` DISABLE KEYS */;
+INSERT INTO `major` VALUES (5000021,200398),(5000024,200398),(5000026,200398),(5000021,200441),(5000023,200441),(5000027,200441),(5000032,200441),(5000035,200441),(5000038,200441),(5000028,200542),(5000030,200542),(5000036,200542),(5000039,200542),(5000025,200637),(5000028,200637),(5000031,200637),(5000034,200637),(5000037,200637),(5000022,200847),(5000029,200847),(5000033,200847),(5000040,200847);
+/*!40000 ALTER TABLE `major` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student` (
+  `sid` int(11) NOT NULL,
+  `fname` varchar(20) DEFAULT NULL,
+  `lname` varchar(20) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES (5000021,'Alice','Smith',19),(5000022,'Wyatt','Johnson',21),(5000023,'Elizabeth','Williams',22),(5000024,'Levi','Brown',19),(5000025,'Lucy','Jones',21),(5000026,'Henry','Miller',21),(5000027,'Scarlett','Davis',24),(5000028,'Jasper','Wilson',23),(5000029,'Luna','Garcia',20),(5000030,'Thomas','Rodriguez',18),(5000031,'Emily','Wilson',21),(5000032,'Josiah','Martinez',23),(5000033,'Sophia','Taylor',18),(5000034,'Hudson','Moore',20),(5000035,'Audrey','Thompson',21),(5000036,'Grayson','Taylor',21),(5000037,'Harper','White',24),(5000038,'Logan','Johnson',18),(5000039,'Eliza','Smith',22),(5000040,'John','Miller',23);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-02-18  5:34:41
